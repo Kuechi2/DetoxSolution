@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- Wichtig: Keine DLL erstellen -->
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Alle Dateien als "Content" markieren -->
+    <None Update="**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <!-- Extension in separaten Ordner kopieren -->
+    <Exec Command="xcopy /Y /E &quot;$(ProjectDir)*&quot; &quot;$(SolutionDir)dist\extension\&quot;" />
+  </Target>
+</Project>

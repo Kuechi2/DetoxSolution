@@ -1,0 +1,41 @@
+{
+  "manifest_version": 2,
+  "name": "De-Tox: Hassrede neutralisieren",
+  "version": "1.0",
+  "description": "Wandelt Hassrede in konstruktive Kritik um - Direkt auf Webseiten!",
+  
+  "permissions": [
+    "activeTab",
+    "storage",
+    "http://localhost/*"
+  ],
+  
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "De-Tox",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  
+  "content_scripts": [{
+    "matches": ["<all_urls>"],  
+    "js": ["content.js"],
+    "css": ["content.css"],
+    "run_at": "document_end"
+  }],
+  
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  
+  "web_accessible_resources": [
+    "icon.png"
+  ]
+}
